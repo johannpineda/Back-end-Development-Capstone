@@ -1,0 +1,19 @@
+services:
+ mongo:
+  image: mongo:7
+  ports: ["27017:27017"]
+ songs:
+  build: ./Back-End-Development-Songs
+  environment: [MONGO_URL=mongodb://mongo:27017]
+  ports: ["5002:8080"]
+  depends_on: [mongo]
+ pictures:
+  build: ./Back-End-Development-Pictures
+  ports: ["5001:8080"]
+ django:
+  build: ./Back-end-Development-Capstone
+  environment:
+   - PICTURES_URL=http://pictures:8080
+   - SONGS_URL=http://songs:8080
+  ports: ["8000:8000"]
+  depends_on: [pictures,songs]

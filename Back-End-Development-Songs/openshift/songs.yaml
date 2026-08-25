@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: songs}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: songs}}
+  template:
+    metadata: {labels: {app: songs}}
+    spec:
+      containers:
+      - name: songs
+        image: IMAGE_REPLACE_ME
+        ports: [{containerPort: 8080}]
+        env:
+        - {name: MONGO_URL, value: mongodb://mongo:27017}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: songs}
+spec:
+  selector: {app: songs}
+  ports: [{port: 8080, targetPort: 8080}]

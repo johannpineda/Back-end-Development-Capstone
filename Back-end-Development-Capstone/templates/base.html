@@ -1,0 +1,3 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}The Example Band{% endblock %}</title><link rel="stylesheet" href="/static/site.css"></head><body>
+<nav><a href="/" class="brand">THE EXAMPLE BAND</a><a href="/concerts/">Concerts</a><a href="/songs/">Songs</a><a href="/photos/">Photos</a><span class="spacer"></span>{% if user.is_authenticated %}<a href="/admin/">Admin</a><form action="/accounts/logout/" method="post">{% csrf_token %}<button>Log out</button></form>{% else %}<a href="/accounts/login/">Log in</a>{% endif %}</nav>
+<main>{% block content %}{% endblock %}</main></body></html>

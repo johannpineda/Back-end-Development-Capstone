@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block title %}Photos{% endblock %}{% block content %}<h1>Photos</h1><div class="photo-grid">{% for p in photos %}<figure><img src="{{p.pic_url}}" alt="Concert in {{p.event_city}}"><figcaption>{{p.event_city}}, {{p.event_country}} · {{p.event_date}}</figcaption></figure>{% empty %}<p>Pictures service unavailable.</p>{% endfor %}</div>{% endblock %}

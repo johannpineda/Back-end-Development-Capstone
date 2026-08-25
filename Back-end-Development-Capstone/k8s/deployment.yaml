@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: band-django}
+spec:
+ replicas: 1
+ selector: {matchLabels: {app: band-django}}
+ template:
+  metadata: {labels: {app: band-django}}
+  spec:
+   containers:
+   - name: band-django
+     image: IMAGE_REPLACE_ME
+     ports: [{containerPort: 8000}]
+     env:
+     - {name: PICTURES_URL, value: PICTURES_URL_REPLACE_ME}
+     - {name: SONGS_URL, value: SONGS_URL_REPLACE_ME}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: band-django}
+spec:
+ type: LoadBalancer
+ selector: {app: band-django}
+ ports: [{port: 80, targetPort: 8000}]
